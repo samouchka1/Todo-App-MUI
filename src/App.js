@@ -21,7 +21,7 @@ const containerStyles = {
 }
 
 const iconBorderStyles = {
-  border: 'solid #9a9a9aa8 1px', //icon border color
+  border: 'solid #ffffffa8 1px', //icon border color
     '&:hover': {
       border: 'solid #000000c6 1px'
     },
