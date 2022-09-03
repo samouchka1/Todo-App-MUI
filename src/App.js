@@ -21,7 +21,7 @@ const containerStyles = {
 }
 
 const iconBorderStyles = {
-  border: 'solid #ffffff8a 1px', //icon border color
+  border: 'solid #9a9a9aa8 1px', //icon border color
     '&:hover': {
       border: 'solid #000000c6 1px'
     },
@@ -30,7 +30,8 @@ const iconBorderStyles = {
 
 const titleStyle = {
   margin: '1.5rem 0',
-  fontFamily: 'Permanent Marker, cursive', 
+  fontFamily: 'Permanent Marker, cursive',
+  color: '#dedcff', 
   // bgcolor: 'white', 
   // borderRadius: '4px', 
   // padding: '10px 0'
