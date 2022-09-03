@@ -6,7 +6,8 @@ import {
   Button,
   TextField,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import './App.css';
 
 const containerStyles = {
@@ -19,52 +20,18 @@ const containerStyles = {
   boxShadow: '2px 2px 4px #c4c4c4'
 }
 
+const iconBorderStyles = {
+  border: 'solid #7e7e7ea8 1px'
+}
+
 
 const App = () => {
   //USE STATE
   const [tasks, setTasks] = useState([]); //array of objects; list; tasks
 
-  // TASK COMPONENT
-  const Task = ({ task, index, removeTask }) => {
-    return (
-        <Box
-            className="task"
-            sx={{ textDecoration: task.completed ? "line-through" : "" }}
-        >
-            {task.title}
-            <Button onClick={() => removeTask(index)}>
-              <DeleteIcon color="error"/>
-            </Button>
-        </Box>
-    );
-  }
-
-  // CREATE TASK COMPONENT
-  const CreateTask = ({ addTask }) => {
-    //USE STATE
-    const [value, setValue] = useState('');
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (!value) return;
-      addTask(value);
-      setValue("");
-  }
-    return ( 
-      <Box component="form" onSubmit={handleSubmit}> {/*<=======  INPUT */}
-        <TextField
-          type="text"
-          value={value}
-          label="Add a task... "
-          onChange={(e) => setValue(e.target.value)}
-        />
-      </Box>
-    )
-  }
-
   // ADD TASK
   const addTask = (title) => {
-                //add input values to existing array
+        //add input values to existing array
     const newTasks = [...tasks, { title, completed: false }];
     setTasks(newTasks);
   };
@@ -83,6 +50,53 @@ const App = () => {
     setTasks(newTasks); //<======= setTasks
   };
 
+  // TASK COMPONENT
+  const Task = ({ task, index, completeTask, removeTask }) => {
+    return (
+      <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem'}}>
+          <Typography 
+            sx={{textDecoration: task.completed ? "line-through" : "", //<======= Mark as completed
+            textAlign: 'left',
+            fontSize: '1.3rem'
+          }}
+          >
+            {task.title}
+          </Typography>
+          <Box component="div" sx={{display: 'flex'}}>
+            <Button onClick={() => completeTask(index)} sx={iconBorderStyles}>
+              <CheckIcon color="success"/>
+            </Button>
+            <Button onClick={() => removeTask(index)} sx={iconBorderStyles}>
+              <DeleteOutlinedIcon color="error"/>
+            </Button>
+          </Box>
+      </Box>
+    );
+  }
+
+  // CREATE TASK COMPONENT
+  const CreateTask = ({ addTask }) => {
+    //USE STATE
+    const [value, setValue] = useState('');
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (!value) return;
+      addTask(value);
+      setValue("");
+  }
+    return ( 
+      <Box component="form" onSubmit={handleSubmit} sx={{padding: '2rem 0'}}> {/*<=======  INPUT */}
+        <TextField
+          type="text"
+          value={value}
+          label="Add a task... "
+          onChange={(e) => setValue(e.target.value)}
+          sx={{caretColor: 'transparent'}}
+        />
+      </Box>
+    )
+  }
 
   return (
 
@@ -92,8 +106,7 @@ const App = () => {
       </Typography>
 
       {tasks.map((task, index) => (
-        <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '1rem 3rem'}}>
-          
+        <Box component="div">
           {/*TASK COMPONENT;  pass index + task */}
           <Task
               task={task}
@@ -105,7 +118,7 @@ const App = () => {
         </Box>
       ))}
 
-        <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask*/}
+        <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask; input*/}
       
     </Container>
   )
