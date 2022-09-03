@@ -14,7 +14,7 @@ const containerStyles = {
   margin: '5rem auto',
   textAlign: 'center',
   padding: '25px',
-  bgcolor: '#c6d8ff',
+  bgcolor: '#dedcff',
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
   boxShadow: '2px 2px 4px #c4c4c4'
@@ -24,7 +24,8 @@ const iconBorderStyles = {
   border: 'solid #7e7e7ea8 1px',
     '&:hover': {
       border: 'solid #000000c6 1px'
-    }
+    },
+  caretColor : 'transparent'
 }
 
 
@@ -58,7 +59,8 @@ const App = () => {
     return (
       <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem'}}>
           <Typography 
-            sx={{textDecoration: task.completed ? "line-through" : "", //<======= Mark as completed
+            sx={{textDecoration: task.completed ? 'line-through' : '',
+            color: task.completed ? '#454545c6' : '',
             textAlign: 'left',
             fontSize: '1.3rem'
           }}
@@ -105,7 +107,7 @@ const App = () => {
 
     <Container maxWidth={'xs'} sx={containerStyles}>
       <Typography variant="h4" sx={{margin: '1.5rem 0'}}>
-        Todo App!
+        Todo App
       </Typography>
 
       {tasks.map((task, index) => (
