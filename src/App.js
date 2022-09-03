@@ -28,6 +28,13 @@ const iconBorderStyles = {
   caretColor : 'transparent'
 }
 
+const titleStyle = {
+  margin: '1.5rem 0', 
+  // bgcolor: 'white', 
+  // borderRadius: '4px', 
+  // padding: '10px 0'
+}
+
 
 const App = () => {
   //USE STATE
@@ -106,7 +113,7 @@ const App = () => {
   return (
 
     <Container maxWidth={'xs'} sx={containerStyles}>
-      <Typography variant="h4" sx={{margin: '1.5rem 0'}}>
+      <Typography variant="h5" sx={titleStyle}>
         Todo App
       </Typography>
 
