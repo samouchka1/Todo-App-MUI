@@ -4,6 +4,7 @@ import {
   Typography,
   Box,
   Button,
+  TextField,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './App.css';
@@ -20,32 +21,68 @@ const containerStyles = {
 
 
 const App = () => {
+  //USE STATE
+  const [tasks, setTasks] = useState([]); //array of objects; list; tasks
 
-  const [tasks, setTasks] = useState([
-      {
-          title: "Grab some Pizza",
-          completed: true
-      },
-      {
-          title: "Do your workout",
-          completed: true
-      },
-      {
-          title: "Hangout with friends",
-          completed: false
-      }
-  ]);
-
-  const Task = ({ task }) => {
+  // TASK COMPONENT
+  const Task = ({ task, index, removeTask }) => {
     return (
-        <div
+        <Box
             className="task"
-            style={{ textDecoration: task.completed ? "line-through" : "" }}
+            sx={{ textDecoration: task.completed ? "line-through" : "" }}
         >
             {task.title}
-        </div>
+            <Button onClick={() => removeTask(index)}>
+              <DeleteIcon color="error"/>
+            </Button>
+        </Box>
     );
   }
+
+  // CREATE TASK COMPONENT
+  const CreateTask = ({ addTask }) => {
+    //USE STATE
+    const [value, setValue] = useState('');
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (!value) return;
+      addTask(value);
+      setValue("");
+  }
+    return ( 
+      <Box component="form" onSubmit={handleSubmit}> {/*<=======  INPUT */}
+        <TextField
+          type="text"
+          value={value}
+          label="Add a task... "
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </Box>
+    )
+  }
+
+  // ADD TASK
+  const addTask = (title) => {
+                //add input values to existing array
+    const newTasks = [...tasks, { title, completed: false }];
+    setTasks(newTasks);
+  };
+
+  // COMPLETE TASK
+  const completeTask = (index) => {
+    const newTasks = [...tasks];
+    newTasks[index].completed = true;
+    setTasks(newTasks); //<======= setTasks
+  };
+
+  //REMOVE TASK
+  const removeTask = (index) => {
+    const newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks); //<======= setTasks
+  };
+
 
   return (
 
@@ -56,16 +93,19 @@ const App = () => {
 
       {tasks.map((task, index) => (
         <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '1rem 3rem'}}>
+          
+          {/*TASK COMPONENT;  pass index + task */}
           <Task
               task={task}
               index={index}
               key={index}
+              completeTask={completeTask}
+              removeTask={removeTask}
           />
-          <Button variant="outlined">
-            <DeleteIcon />
-          </Button>
         </Box>
       ))}
+
+        <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask*/}
       
     </Container>
   )
