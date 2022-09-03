@@ -13,7 +13,7 @@ import './App.css';
 const containerStyles = {
   margin: '5rem auto',
   textAlign: 'center',
-  padding: '25px',
+  padding: '1.57rem',
   bgcolor: '#dedcff',
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
@@ -118,16 +118,16 @@ const App = () => {
       </Typography>
 
       {tasks.map((task, index) => (
-        <Box component="div">
-          {/*TASK COMPONENT;  pass index + task */}
-          <Task
-              task={task}
-              index={index}
-              key={index}
-              completeTask={completeTask}
-              removeTask={removeTask}
-          />
-        </Box>
+          <Box component="div">
+            {/*TASK COMPONENT;  pass index + task */}
+            <Task
+                task={task}
+                index={index}
+                key={index}
+                completeTask={completeTask}
+                removeTask={removeTask}
+            />
+          </Box>
       ))}
 
         <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask; input*/}
