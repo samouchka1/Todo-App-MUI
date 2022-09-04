@@ -14,14 +14,14 @@ const containerStyles = {
   margin: '5rem auto',
   textAlign: 'center',
   padding: '1.57rem',
-  background: 'linear-gradient(180deg, rgba(71,57,176,1) 0%, rgba(147,226,227,1) 100%);', //gradient
+  background: 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);', //gradient
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
   boxShadow: '2px 2px 4px #c4c4c4'
 }
 
 const iconBorderStyles = {
-  border: 'solid #ffffffa8 1px', //icon border color
+  border: 'solid #a9a8a8f7 1px', //icon border color
     '&:hover': {
       border: 'solid #000000c6 1px'
     },
@@ -30,11 +30,9 @@ const iconBorderStyles = {
 
 const titleStyle = {
   margin: '1.5rem 0',
-  fontFamily: 'Permanent Marker, cursive',
-  color: '#dedcff', 
-  // bgcolor: 'white', 
-  // borderRadius: '4px', 
-  // padding: '10px 0'
+  fontFamily: 'Nunito, sans-serif', //font family
+  color: '#090909f7', //title color
+  textShadow: 'white 3px 3px 3px',
 }
 
 
@@ -115,7 +113,7 @@ const App = () => {
   return (
 
     <Container maxWidth={'xs'} sx={containerStyles}>
-      <Typography variant="h5" sx={titleStyle}>
+      <Typography variant="h4" sx={titleStyle}>
         Todo App
       </Typography>
 
