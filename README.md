@@ -1,2 +1,1 @@
-Remake of Todo App. This time using Material UI and functional components (hooks).
-Under Development.
+Todo App using React.js with Material UI and functional components (hooks).
