@@ -11,7 +11,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import './App.css';
 
 const containerStyles = {
-  margin: '5rem auto',
+  margin: '10rem auto 2rem',
   textAlign: 'center',
   padding: '1.57rem',
   background: 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);', //gradient
@@ -33,6 +33,15 @@ const titleStyle = {
   fontFamily: 'Nunito, sans-serif', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
+}
+
+const signatureStyle = {
+  color: '#2d2d2d',
+  margin: '2rem auto',
+  fontSize: '.7rem',
+  textAlign: 'right',
+  caretColor: 'transparent',
+  paddingRight: '.5rem'
 }
 
 
@@ -111,28 +120,32 @@ const App = () => {
   }
 
   return (
+    <div>
+      <Container maxWidth='md' sx={containerStyles}>
+        <Typography variant="h4" sx={titleStyle}>
+          Todo App
+        </Typography>
 
-    <Container maxWidth={'xs'} sx={containerStyles}>
-      <Typography variant="h4" sx={titleStyle}>
-        Todo App
+        {tasks.map((task, index) => (
+            <Box component="div">
+              {/*TASK COMPONENT;  pass index + task */}
+              <Task
+                  task={task}
+                  index={index}
+                  key={index}
+                  completeTask={completeTask}
+                  removeTask={removeTask}
+              />
+            </Box>
+        ))}
+
+          <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask; input*/}
+        
+      </Container>
+      <Typography maxWidth='md' sx={signatureStyle}>
+          &copy; {new Date().getFullYear()} samouchka
       </Typography>
-
-      {tasks.map((task, index) => (
-          <Box component="div">
-            {/*TASK COMPONENT;  pass index + task */}
-            <Task
-                task={task}
-                index={index}
-                key={index}
-                completeTask={completeTask}
-                removeTask={removeTask}
-            />
-          </Box>
-      ))}
-
-        <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask; input*/}
-      
-    </Container>
+    </div>
   )
 }
 
