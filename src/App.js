@@ -121,7 +121,7 @@ const App = () => {
 
   return (
     <div>
-      <Container maxWidth='md' sx={containerStyles}>
+      <Container maxWidth='sm' sx={containerStyles}>
         <Typography variant="h4" sx={titleStyle}>
           Todo App
         </Typography>
