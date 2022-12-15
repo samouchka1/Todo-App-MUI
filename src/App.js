@@ -46,28 +46,28 @@ const signatureStyle = {
 
 
 const App = () => {
-  //USE STATE
+
   const [tasks, setTasks] = useState([]); //array of objects; list; tasks
 
-  // ADD TASK
+
   const addTask = (title) => {
         //add input values to existing array
     const newTasks = [...tasks, { title, completed: false }];
     setTasks(newTasks);
   };
 
-  // COMPLETE TASK
+
   const completeTask = (index) => {
     const newTasks = [...tasks];
     newTasks[index].completed = true;
-    setTasks(newTasks); //<======= setTasks
+    setTasks(newTasks);
   };
 
-  //REMOVE TASK
+
   const removeTask = (index) => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
-    setTasks(newTasks); //<======= setTasks
+    setTasks(newTasks);
   };
 
   // TASK COMPONENT
@@ -128,7 +128,8 @@ const App = () => {
 
         {tasks.map((task, index) => (
             <Box component="div">
-              {/*TASK COMPONENT;  pass index + task */}
+
+              {/*TASK COMPONENT */}
               <Task
                   task={task}
                   index={index}
@@ -136,10 +137,12 @@ const App = () => {
                   completeTask={completeTask}
                   removeTask={removeTask}
               />
+              
             </Box>
         ))}
 
-          <CreateTask addTask={addTask} /> {/* <======= CREATE TASK COMPONENT; pass addTask; input*/}
+          {/*CREATE TASK COMPONENT*/}
+          <CreateTask addTask={addTask} />
         
       </Container>
       <Typography maxWidth='md' sx={signatureStyle}>
