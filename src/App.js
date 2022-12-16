@@ -6,14 +6,16 @@ import {
   Button,
   TextField,
 } from '@mui/material';
+import { ThemeProvider, useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import './App.css';
+import 'animate.css';
 
 const containerStyles = {
-  margin: '10rem auto 2rem',
+  margin: '6rem auto 2rem',
   textAlign: 'center',
-  padding: '1.57rem',
+  padding: { md: '1.6rem', xs: '1.2rem'},
   background: 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);', //gradient
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
@@ -25,11 +27,12 @@ const iconBorderStyles = {
     '&:hover': {
       border: 'solid #000000c6 1px'
     },
-  caretColor : 'transparent'
+  caretColor : 'transparent',
+  backgroundColor: 'background.default'
 }
 
 const titleStyle = {
-  margin: '1.5rem 0',
+  margin: '3rem 0',
   fontFamily: 'Nunito, sans-serif', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
@@ -47,6 +50,18 @@ const signatureStyle = {
 
 const App = () => {
 
+const theme = useTheme();
+
+  // const [action, setAction] = useState(true)
+
+  React.useEffect(() => {
+    document.querySelector(".title").classList.remove("tracking-in-expand")
+    setTimeout(() => {
+      document.querySelector(".title").classList.add("tracking-in-expand")
+    }, 5);
+  }, [])
+
+
   const [tasks, setTasks] = useState([]); //array of objects; list; tasks
 
 
@@ -54,6 +69,7 @@ const App = () => {
         //add input values to existing array
     const newTasks = [...tasks, { title, completed: false }];
     setTasks(newTasks);
+    // setAction(!action); //setAction
   };
 
 
@@ -73,13 +89,29 @@ const App = () => {
   // TASK COMPONENT
   const Task = ({ task, index, completeTask, removeTask }) => {
     return (
-      <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem'}}>
+      <Box 
+        sx={{
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          padding: '2rem',
+        }}
+      >
           <Typography 
-            sx={{textDecoration: task.completed ? 'line-through' : '',
-            color: task.completed ? '#454545c6' : '',
-            textAlign: 'left',
-            fontSize: '1.3rem'
-          }}
+            sx={{
+              textDecoration: task.completed ? 'line-through' : '',
+              color: task.completed ? '#454545c6' : '',
+              textAlign: 'left',
+              fontSize: '1.3rem',
+              border: `solid #7c7c7c94 1px`,
+              width: '100%',
+              margin: { md: '1rem', xs: '.5rem .25rem'},
+              padding: '.15rem',
+              borderRadius: '4px',
+              backgroundColor: 'background.default'
+            }}
+            className="animate__animated"
+            id={index}
           >
             {task.title}
           </Typography>
@@ -87,7 +119,18 @@ const App = () => {
             <Button onClick={() => completeTask(index)} sx={iconBorderStyles}>
               <CheckIcon color="success"/>
             </Button>
-            <Button onClick={() => removeTask(index)} sx={iconBorderStyles}>
+            <Button 
+              sx={iconBorderStyles}
+              onClick={() => {
+
+                document.getElementById(index).classList.add("animate__fadeOutLeft");
+                // setAction(!action)
+                setTimeout(() => {
+                  removeTask(index);
+                }, 500)
+
+              }} 
+            >
               <DeleteOutlinedIcon color="error"/>
             </Button>
           </Box>
@@ -97,7 +140,7 @@ const App = () => {
 
   // CREATE TASK COMPONENT
   const CreateTask = ({ addTask }) => {
-    //USE STATE
+
     const [value, setValue] = useState('');
 
     const handleSubmit = (e) => {
@@ -107,24 +150,38 @@ const App = () => {
       setValue("");
   }
     return ( 
-      <Box component="form" onSubmit={handleSubmit} sx={{padding: '2rem 0'}}> {/*<=======  INPUT */}
+      
+      <Box component="form" onSubmit={handleSubmit} sx={{padding: '2rem 0'}}> {/* INPUT */}
         <TextField
+          // multiline
+          // maxRows={4}
           type="text"
           value={value}
           label="Add a task... "
           onChange={(e) => setValue(e.target.value)}
-          sx={{caretColor: 'transparent'}}
+          sx={{
+            // caretColor: 'transparent',
+            width: 400,
+            maxWidth: '100%',
+            backgroundColor: 'background.default'
+          }}
         />
       </Box>
     )
   }
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Container maxWidth='sm' sx={containerStyles}>
-        <Typography variant="h4" sx={titleStyle}>
-          Todo App
-        </Typography>
+          <Typography 
+            variant="h4" 
+            sx={titleStyle} 
+            // className={action ? 'tracking-in-expand' : ''}
+            className="title"
+          
+          >
+            Todo App
+          </Typography>
 
         {tasks.map((task, index) => (
             <Box component="div">
@@ -137,7 +194,7 @@ const App = () => {
                   completeTask={completeTask}
                   removeTask={removeTask}
               />
-              
+
             </Box>
         ))}
 
@@ -148,7 +205,7 @@ const App = () => {
       <Typography maxWidth='md' sx={signatureStyle}>
           &copy; {new Date().getFullYear()} samouchka
       </Typography>
-    </div>
+    </ThemeProvider>
   )
 }
 
