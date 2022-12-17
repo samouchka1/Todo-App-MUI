@@ -224,7 +224,7 @@ const theme = useTheme();
             sx={titleStyle} 
             className="title"
           >
-            Todo App
+            To-do App
           </Typography>
 
         {tasks.map((task, index) => (
