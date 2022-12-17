@@ -9,6 +9,7 @@ import {
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 import './App.css';
 import 'animate.css';
 
@@ -52,8 +53,6 @@ const App = () => {
 
 const theme = useTheme();
 
-  // const [action, setAction] = useState(true)
-
   React.useEffect(() => {
     document.querySelector(".title").classList.remove("tracking-in-expand")
     setTimeout(() => {
@@ -63,19 +62,18 @@ const theme = useTheme();
 
 
   const [tasks, setTasks] = useState([]); //array of objects; list; tasks
-
+  const [complete, setComplete] = useState(false)
 
   const addTask = (title) => {
         //add input values to existing array
-    const newTasks = [...tasks, { title, completed: false }];
+    const newTasks = [...tasks, { title, completed: complete }];
     setTasks(newTasks);
-    // setAction(!action); //setAction
   };
-
 
   const completeTask = (index) => {
     const newTasks = [...tasks];
-    newTasks[index].completed = true;
+    setComplete(!complete)
+    newTasks[index].completed = !complete;
     setTasks(newTasks);
   };
 
@@ -86,21 +84,45 @@ const theme = useTheme();
     setTasks(newTasks);
   };
 
+
+
+
+  // ======= EDITING TASK =========
+
+  // const editTask = (index, newTitle) => { //testing
+  //   const newTasks = [...tasks];
+    
+  //   setTasks(newTasks);
+  // }
+
+  // const [edit, setEdit] = useState(true);
+
+  // const handleEditing = () => {
+  //   setEdit(!edit)
+  // }
+
+
   // TASK COMPONENT
-  const Task = ({ task, index, completeTask, removeTask }) => {
+  const Task = ({ task, index, completeTask, removeTask, editTask }) => {
+
     return (
       <Box 
         sx={{
           display: 'flex', 
+          flexDirection: {md: 'row', xs:'column'},
           justifyContent: 'space-between', 
           alignItems: 'center', 
           padding: '2rem',
         }}
       >
+
+        {/* {edit ? ( */}
+
           <Typography 
             sx={{
               textDecoration: task.completed ? 'line-through' : '',
               color: task.completed ? '#454545c6' : '',
+              backgroundColor: task.completed ? 'grey.100' : 'background.default',
               textAlign: 'left',
               fontSize: '1.3rem',
               border: `solid #7c7c7c94 1px`,
@@ -108,32 +130,56 @@ const theme = useTheme();
               margin: { md: '1rem', xs: '.5rem .25rem'},
               padding: '.15rem',
               borderRadius: '4px',
-              backgroundColor: 'background.default'
             }}
             className="animate__animated"
             id={index}
           >
             {task.title}
           </Typography>
+          
+         {/* ) : (
+
+          <TextField
+            type="text"
+            value={task.title}
+
+          />
+        )} */}
+          
+         
+            {/* BUTTONS */}
           <Box component="div" sx={{display: 'flex'}}>
-            <Button onClick={() => completeTask(index)} sx={iconBorderStyles}>
+
+            <Button //complete task
+              onClick={() => completeTask(index)} 
+              sx={iconBorderStyles}
+            >
               <CheckIcon color="success"/>
             </Button>
-            <Button 
+
+              <Button //edit task
+                // onClick={handleEditing}
+                sx={iconBorderStyles}
+                disabled
+              >
+                <EditIcon color="primary.main"/>
+              </Button>
+
+            <Button  //remove task
               sx={iconBorderStyles}
               onClick={() => {
 
                 document.getElementById(index).classList.add("animate__fadeOutLeft");
-                // setAction(!action)
                 setTimeout(() => {
                   removeTask(index);
-                }, 500)
+                }, 350)
 
               }} 
             >
               <DeleteOutlinedIcon color="error"/>
             </Button>
           </Box>
+
       </Box>
     );
   }
@@ -176,9 +222,7 @@ const theme = useTheme();
           <Typography 
             variant="h4" 
             sx={titleStyle} 
-            // className={action ? 'tracking-in-expand' : ''}
             className="title"
-          
           >
             Todo App
           </Typography>
@@ -193,6 +237,7 @@ const theme = useTheme();
                   key={index}
                   completeTask={completeTask}
                   removeTask={removeTask}
+                  // editTask={editTask}
               />
 
             </Box>

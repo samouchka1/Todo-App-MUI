@@ -6,6 +6,17 @@
   color:#7c7c7c94;
 }
 
+/*EDIT STYLES*/
+
+.show{
+  display: 'block';
+}
+.hide{
+  display: 'none';
+}
+
+
+
 /* ANIMISTA EFFECTS */
 
 .tracking-in-expand {
@@ -14,8 +25,8 @@
 }
 
 .slide-out-left {
-	-webkit-animation: slide-out-left 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: slide-out-left 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	-webkit-animation: slide-out-left 0.35s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-left 0.35s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 /**
