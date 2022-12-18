@@ -9,7 +9,6 @@ import {
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import EditIcon from '@mui/icons-material/Edit';
 import './App.css';
 import 'animate.css';
 
@@ -85,25 +84,8 @@ const theme = useTheme();
   };
 
 
-
-
-  // ======= EDITING TASK =========
-
-  // const editTask = (index, newTitle) => { //testing
-  //   const newTasks = [...tasks];
-    
-  //   setTasks(newTasks);
-  // }
-
-  // const [edit, setEdit] = useState(true);
-
-  // const handleEditing = () => {
-  //   setEdit(!edit)
-  // }
-
-
   // TASK COMPONENT
-  const Task = ({ task, index, completeTask, removeTask, editTask }) => {
+  const Task = ({ task, index, completeTask, removeTask }) => {
 
     return (
       <Box 
@@ -116,35 +98,24 @@ const theme = useTheme();
         }}
       >
 
-        {/* {edit ? ( */}
-
-          <Typography 
-            sx={{
-              textDecoration: task.completed ? 'line-through' : '',
-              color: task.completed ? '#454545c6' : '',
-              backgroundColor: task.completed ? 'grey.100' : 'background.default',
-              textAlign: 'left',
-              fontSize: '1.3rem',
-              border: `solid #7c7c7c94 1px`,
-              width: '100%',
-              margin: { md: '1rem', xs: '.5rem .25rem'},
-              padding: '.15rem',
-              borderRadius: '4px',
-            }}
-            className="animate__animated"
-            id={index}
-          >
-            {task.title}
-          </Typography>
-          
-         {/* ) : (
-
-          <TextField
-            type="text"
-            value={task.title}
-
-          />
-        )} */}
+        <Typography 
+          sx={{
+            textDecoration: task.completed ? 'line-through' : '',
+            color: task.completed ? '#454545c6' : '',
+            backgroundColor: task.completed ? 'grey.100' : 'background.default',
+            textAlign: 'left',
+            fontSize: '1rem',
+            border: `solid #7c7c7c94 1px`,
+            width: '100%',
+            margin: { md: '1rem', xs: '.5rem .25rem'},
+            padding: '.95rem',
+            borderRadius: '4px',
+          }}
+          className="animate__animated"
+          id={index}
+        >
+          {task.title}
+        </Typography>
           
          
             {/* BUTTONS */}
@@ -156,14 +127,6 @@ const theme = useTheme();
             >
               <CheckIcon color="success"/>
             </Button>
-
-              <Button //edit task
-                // onClick={handleEditing}
-                sx={iconBorderStyles}
-                disabled
-              >
-                <EditIcon color="primary.main"/>
-              </Button>
 
             <Button  //remove task
               sx={iconBorderStyles}
@@ -203,7 +166,7 @@ const theme = useTheme();
           // maxRows={4}
           type="text"
           value={value}
-          label="Add a task... "
+          label="Add task"
           onChange={(e) => setValue(e.target.value)}
           sx={{
             // caretColor: 'transparent',
@@ -237,7 +200,6 @@ const theme = useTheme();
                   key={index}
                   completeTask={completeTask}
                   removeTask={removeTask}
-                  // editTask={editTask}
               />
 
             </Box>
