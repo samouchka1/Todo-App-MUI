@@ -219,6 +219,7 @@ const theme = useTheme();
                   document.getElementById(index).classList.add("animate__bounceOut");
                   setTimeout(() => {
                     removeTask(index);
+                    document.querySelector('.title').classList.add("animate__pulse");
                   }, 550);
                 }} 
               >
