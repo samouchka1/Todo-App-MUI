@@ -5,10 +5,13 @@ import {
   Box,
   Button,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
 import './App.css';
 import 'animate.css';
 
@@ -32,7 +35,7 @@ const iconBorderStyles = {
 }
 
 const titleStyle = {
-  margin: '3rem 0',
+  margin: '2rem 0',
   fontFamily: 'Nunito, sans-serif', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
@@ -59,13 +62,11 @@ const theme = useTheme();
     }, 5);
   }, [])
 
-
-  const [tasks, setTasks] = useState([]); //array of objects; list; tasks
+  const [tasks, setTasks] = useState([]);
   const [complete, setComplete] = useState(false)
 
   const addTask = (title) => {
-        //add input values to existing array
-    const newTasks = [...tasks, { title, completed: complete }];
+    const newTasks = [...tasks, { title, completed: false }];
     setTasks(newTasks);
   };
 
@@ -76,16 +77,39 @@ const theme = useTheme();
     setTasks(newTasks);
   };
 
-
   const removeTask = (index) => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
   };
 
+  const editTask = (index, editedTitle) => {
+    const newTasks = [...tasks];
+    newTasks[index] = editedTitle;
+    setTasks(newTasks);
+  }
+
 
   // TASK COMPONENT
-  const Task = ({ task, index, completeTask, removeTask }) => {
+  const Task = ({ task, index, completeTask, removeTask, editTask }) => {
+
+    //edit states
+    const [editValue, setEditValue] = useState(task.title);
+    const [cancel, setCancel] = useState(false)
+    const [isEditing, setIsEditing] = useState({index, bool: false});
+
+    const handleClearEdit = () => {
+      setEditValue(task.title);
+      setIsEditing({index, bool: false});
+      setCancel(false);
+    }
+
+    const handleEditSubmit = (e) => {
+      e.preventDefault();
+      if (!editValue) return;
+      task.title = editValue;
+      editTask(editValue);
+    }
 
     return (
       <Box 
@@ -94,58 +118,119 @@ const theme = useTheme();
           flexDirection: {md: 'row', xs:'column'},
           justifyContent: 'space-between', 
           alignItems: 'center', 
-          padding: '2rem',
+          padding: {
+            md: '2rem',
+            xs: '1.4rem'
+          }
         }}
       >
 
-        <Typography 
-          sx={{
-            textDecoration: task.completed ? 'line-through' : '',
-            color: task.completed ? '#454545c6' : '',
-            backgroundColor: task.completed ? 'grey.100' : 'background.default',
-            textAlign: 'left',
-            fontSize: '1rem',
-            border: `solid #7c7c7c94 1px`,
-            width: '100%',
-            margin: { md: '1rem', xs: '.5rem .25rem'},
-            padding: '.95rem',
-            borderRadius: '4px',
-          }}
-          className="animate__animated"
-          id={index}
-        >
-          {task.title}
-        </Typography>
-          
-         
+
+        {isEditing.bool ? 
+
+          <Box 
+            component="form" 
+            onSubmit={handleEditSubmit}
+            sx={{
+              margin: {
+                md: '.95rem 0 .95rem .95rem',
+                xs: '.95rem 0'
+              },
+              backgroundColor: 'background.default'
+            }} 
+          >
+            <TextField 
+              type="text"
+              value={editValue}
+              label="Edit task"
+              onChange={(e) => {
+                setEditValue(e.target.value)
+                setCancel(true);
+              }}
+              sx={{
+                width: {
+                  md: 260,
+                  xs: 300,
+                },
+              }}
+            />
+          </Box> 
+
+        : 
+
+          <Typography 
+            sx={{
+              textDecoration: task.completed ? 'line-through' : '',
+              color: task.completed ? '#454545c6' : '',
+              // backgroundColor: task.completed ? '#bbbbbb85' : '#ffffff85',
+              textAlign: 'left',
+              fontFamily: 'Nunito, sans-serif',
+              fontSize: '1.5rem',
+              // border: `solid #7c7c7c94 1px`,
+              width: '100%',
+              margin: { md: '1rem', xs: '.5rem .25rem'},
+              padding: '.95rem',
+              borderRadius: '4px',
+            }}
+            className="animate__animated"
+            id={index}
+          >
+            {task.title}
+          </Typography>
+
+        }
+
+
             {/* BUTTONS */}
           <Box component="div" sx={{display: 'flex'}}>
+            <Tooltip title="Complete Task">
+              <Button //complete task
+                onClick={() => completeTask(index)} 
+                sx={iconBorderStyles}
+              >
+                <CheckIcon color="success"/>
+              </Button>
+            </Tooltip>
 
-            <Button //complete task
-              onClick={() => completeTask(index)} 
-              sx={iconBorderStyles}
-            >
-              <CheckIcon color="success"/>
-            </Button>
+            {cancel ? 
+            <Tooltip title="Cancel Edit">
+              <Button //cancel edit
+                sx={iconBorderStyles} 
+                onClick={handleClearEdit}>
+                <ClearIcon />
+              </Button> 
+            </Tooltip>
+            : 
+            <Tooltip title="Edit Task">
+              <Button //edit task
+                sx={iconBorderStyles}
+                onClick={() => setIsEditing({index, bool: !isEditing.bool})}
+              >
+                <EditIcon color="primary.main" />
+              </Button>
+            </Tooltip>
+            }
 
-            <Button  //remove task
-              sx={iconBorderStyles}
-              onClick={() => {
+            <Tooltip title="Remove Task">
+              <Button  //remove task
+                sx={iconBorderStyles}
+                onClick={() => {
+                  document.getElementById(index).classList.add("animate__fadeOutLeft");
+                  setTimeout(() => {
+                    removeTask(index);
+                  }, 350);
+                }} 
+              >
+                <DeleteOutlinedIcon color="error"/>
+              </Button>
+            </Tooltip>
 
-                document.getElementById(index).classList.add("animate__fadeOutLeft");
-                setTimeout(() => {
-                  removeTask(index);
-                }, 350)
-
-              }} 
-            >
-              <DeleteOutlinedIcon color="error"/>
-            </Button>
           </Box>
 
       </Box>
     );
   }
+
 
   // CREATE TASK COMPONENT
   const CreateTask = ({ addTask }) => {
@@ -157,10 +242,10 @@ const theme = useTheme();
       if (!value) return;
       addTask(value);
       setValue("");
-  }
+    }
     return ( 
       
-      <Box component="form" onSubmit={handleSubmit} sx={{padding: '2rem 0'}}> {/* INPUT */}
+      <Box component="form" onSubmit={handleSubmit} sx={{p: '2rem 0'}}> {/* INPUT */}
         <TextField
           // multiline
           // maxRows={4}
@@ -179,13 +264,15 @@ const theme = useTheme();
     )
   }
 
+
+
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth='sm' sx={containerStyles}>
           <Typography 
             variant="h4" 
             sx={titleStyle} 
-            className="title"
+            className="title pulse-effect animate__animated"
           >
             To-do App
           </Typography>
@@ -195,11 +282,12 @@ const theme = useTheme();
 
               {/*TASK COMPONENT */}
               <Task
-                  task={task}
-                  index={index}
-                  key={index}
-                  completeTask={completeTask}
-                  removeTask={removeTask}
+                task={task}
+                index={index}
+                key={index}
+                completeTask={completeTask}
+                removeTask={removeTask}
+                editTask={editTask}
               />
 
             </Box>
