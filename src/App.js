@@ -215,10 +215,10 @@ const theme = useTheme();
               <Button  //remove task
                 sx={iconBorderStyles}
                 onClick={() => {
-                  document.getElementById(index).classList.add("animate__fadeOutLeft");
+                  document.getElementById(index).classList.add("animate__bounceOut");
                   setTimeout(() => {
                     removeTask(index);
-                  }, 350);
+                  }, 550);
                 }} 
               >
                 <DeleteOutlinedIcon color="error"/>
@@ -272,7 +272,7 @@ const theme = useTheme();
           <Typography 
             variant="h4" 
             sx={titleStyle} 
-            className="title pulse-effect animate__animated"
+            className="title animate__animated"
           >
             To-do App
           </Typography>
