@@ -39,6 +39,7 @@ const titleStyle = {
   fontFamily: 'Nunito, sans-serif', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
+  caretColor: 'transparent',
 }
 
 const signatureStyle = {
