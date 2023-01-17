@@ -77,6 +77,7 @@ const theme = useTheme();
 
   const [tasks, setTasks] = useState([]);
   const [complete, setComplete] = useState(false)
+  const [show, setShow] = useState(false) //setShow
 
   const addTask = (title) => {
     const newTasks = [...tasks, { title, completed: false }];
@@ -94,6 +95,7 @@ const theme = useTheme();
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
+    setShow(false);
   };
 
   const editTask = (index, editedTitle) => {
@@ -253,6 +255,7 @@ const theme = useTheme();
       if (!value) return;
       addTask(value);
       setValue("");
+      setShow(true);
     }
     return ( 
       
@@ -285,10 +288,12 @@ const theme = useTheme();
             margin: '6rem 0', 
             display: 'flex', 
             flexDirection: {md: 'row', xs: 'column-reverse'}, 
+            gap: '.5rem',
             justifyContent: 'center'
           }}
         >
 
+          {show && 
             <Box sx={containerStyles}>
               {tasks.map((task, index) => (
                   <>
@@ -304,6 +309,7 @@ const theme = useTheme();
                   </>
               ))}
             </Box>
+          }
 
           <Box sx={MainContainerStyles}>
             <Typography 
