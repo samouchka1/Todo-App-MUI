@@ -32,6 +32,11 @@
 	        animation: slide-out-left 0.35s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
+.color-change-2x {
+	-webkit-animation: color-change-2x 3s linear infinite alternate both;
+	        animation: color-change-2x 3s linear infinite alternate both;
+}
+
 /**
  * ----------------------------------------
  * animation tracking-in-expand
@@ -90,6 +95,29 @@
     -webkit-transform: translateX(-1000px);
             transform: translateX(-1000px);
     opacity: 0;
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation color-change-2x
+ * ----------------------------------------
+ */
+ @-webkit-keyframes color-change-2x {
+  0% {
+    background: #f8f8f8;
+  }
+  100% {
+    background: #b3bdff;
+  }
+}
+@keyframes color-change-2x {
+  0% {
+    background: #f8f8f8;
+  
+  }
+  100% {
+    background: #b3bdff;
   }
 }
 

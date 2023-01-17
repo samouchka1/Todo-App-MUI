@@ -54,6 +54,8 @@ const signatureStyle = {
 
 const App = () => {
 
+document.body.classList.add("color-change-2x")
+
 const theme = useTheme();
 
   React.useEffect(() => {
