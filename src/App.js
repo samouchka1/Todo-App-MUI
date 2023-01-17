@@ -15,14 +15,24 @@ import ClearIcon from '@mui/icons-material/Clear';
 import './App.css';
 import 'animate.css';
 
-const containerStyles = {
-  margin: '6rem auto 2rem',
+const bgGradient = 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);'
+
+const MainContainerStyles = {
   textAlign: 'center',
   padding: { md: '1.6rem', xs: '1.2rem'},
-  background: 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);', //gradient
+  background: bgGradient,
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
-  boxShadow: '2px 2px 4px #c4c4c4'
+  boxShadow: '2px 2px 4px #c4c4c4',
+  height: '14rem',
+}
+const containerStyles = {
+  textAlign: 'center', 
+  background: bgGradient,
+  borderRadius: '5px',
+  border: 'solid .5px #aaaaaa',
+  boxShadow: '2px 2px 4px #c4c4c4',
+  height: 'auto',
 }
 
 const iconBorderStyles = {
@@ -54,7 +64,7 @@ const signatureStyle = {
 
 const App = () => {
 
-document.body.classList.add("color-change-2x")
+document.body.classList.add("color-change-2x") //animista
 
 const theme = useTheme();
 
@@ -118,12 +128,12 @@ const theme = useTheme();
       <Box 
         sx={{
           display: 'flex', 
-          flexDirection: {md: 'row', xs:'column'},
+          flexDirection: 'column',
           justifyContent: 'space-between', 
           alignItems: 'center', 
           padding: {
-            md: '2rem',
-            xs: '1.4rem'
+            md: '1.2rem 0',
+            xs: '.8rem 0'
           }
         }}
       >
@@ -135,11 +145,7 @@ const theme = useTheme();
             component="form" 
             onSubmit={handleEditSubmit}
             sx={{
-              margin: {
-                md: '.95rem 0 .95rem .95rem',
-                xs: '.95rem 0'
-              },
-              backgroundColor: 'background.default'
+              backgroundColor: 'background.default',
             }} 
           >
             <TextField 
@@ -168,17 +174,18 @@ const theme = useTheme();
               // backgroundColor: task.completed ? '#bbbbbb85' : '#ffffff85',
               textAlign: 'left',
               fontFamily: 'Nunito, sans-serif',
-              fontSize: '1.5rem',
-              // border: `solid #7c7c7c94 1px`,
-              width: '100%',
+              fontSize: '1rem',
+              width: {
+                md: 260,
+                xs: 300,
+              },
+              padding: '.25rem',
               margin: { md: '1rem', xs: '.5rem .25rem'},
-              padding: '.95rem',
               borderRadius: '4px',
             }}
-            className="animate__animated"
             id={index}
           >
-            {task.title}
+              {task.title}
           </Typography>
 
         }
@@ -191,7 +198,7 @@ const theme = useTheme();
                 onClick={() => completeTask(index)} 
                 sx={iconBorderStyles}
               >
-                <CheckIcon color="success"/>
+                <CheckIcon fontSize="small" color="success"/>
               </Button>
             </Tooltip>
 
@@ -200,7 +207,7 @@ const theme = useTheme();
               <Button //cancel edit
                 sx={iconBorderStyles} 
                 onClick={handleClearEdit}>
-                <ClearIcon />
+                <ClearIcon fontSize="small" />
               </Button> 
             </Tooltip>
             : 
@@ -209,7 +216,7 @@ const theme = useTheme();
                 sx={iconBorderStyles}
                 onClick={() => setIsEditing({index, bool: !isEditing.bool})}
               >
-                <EditIcon color="primary.main" />
+                <EditIcon fontSize="small" color="primary.main" />
               </Button>
             </Tooltip>
             }
@@ -224,7 +231,7 @@ const theme = useTheme();
                   }, 550);
                 }} 
               >
-                <DeleteOutlinedIcon color="error"/>
+                <DeleteOutlinedIcon fontSize="small" color="error"/>
               </Button>
             </Tooltip>
 
@@ -257,7 +264,6 @@ const theme = useTheme();
           label="Add task"
           onChange={(e) => setValue(e.target.value)}
           sx={{
-            // caretColor: 'transparent',
             width: 400,
             maxWidth: '100%',
             backgroundColor: 'background.default'
@@ -271,33 +277,55 @@ const theme = useTheme();
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth='sm' sx={containerStyles}>
-          <Typography 
-            variant="h4" 
-            sx={titleStyle} 
-            className="title animate__animated"
-          >
-            To-do App
-          </Typography>
+      <Container maxWidth={false}>
 
-        {tasks.map((task, index) => (
-            <Box component="div">
+        <Box 
+          sx={{
+            margin: '6rem 0', 
+            display: 'flex', 
+            flexDirection: {md: 'row', xs: 'column-reverse'}, 
+            justifyContent: 'center'
+          }}
+        >
 
-              {/*TASK COMPONENT */}
-              <Task
-                task={task}
-                index={index}
-                key={index}
-                completeTask={completeTask}
-                removeTask={removeTask}
-                editTask={editTask}
-              />
-
+            <Box sx={containerStyles}>
+              {tasks.map((task, index) => (
+                  <>
+                    {/*TASK COMPONENT */}
+                    <Task
+                      task={task}
+                      index={index}
+                      key={index}
+                      completeTask={completeTask}
+                      removeTask={removeTask}
+                      editTask={editTask}
+                    />
+                  </>
+              ))}
             </Box>
-        ))}
 
-          {/*CREATE TASK COMPONENT*/}
-          <CreateTask addTask={addTask} />
+          <Box sx={MainContainerStyles}>
+            <Typography 
+              variant="h4" 
+              sx={titleStyle} 
+              className="title animate__animated"
+            >
+              To-do App
+            </Typography>
+
+            {/*CREATE TASK COMPONENT*/}
+            <CreateTask addTask={addTask} />
+          </Box>
+
+          {/* <Box>
+            {tasks.map((task, index) => (
+              <Typography key={index}>{task.completed}</Typography>
+            ))}
+          </Box> */}
+
+        </Box>
+        
+        
         
       </Container>
       <Typography maxWidth='md' sx={signatureStyle}>
