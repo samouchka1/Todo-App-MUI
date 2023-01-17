@@ -140,29 +140,30 @@ const theme = useTheme();
 
 
         {isEditing.bool ? 
-
-          <Box 
-            component="form" 
-            onSubmit={handleEditSubmit}
-            sx={{
-              backgroundColor: 'background.default',
-            }} 
-          >
-            <TextField 
-              type="text"
-              value={editValue}
-              label="Edit task"
-              onChange={(e) => {
-                setEditValue(e.target.value)
-                setCancel(true);
-              }}
+          <Box sx={{p: '0 1.25rem'}}>
+            <Box 
+              component="form" 
+              onSubmit={handleEditSubmit}
               sx={{
-                width: {
-                  md: 260,
-                  xs: 300,
-                },
-              }}
-            />
+                backgroundColor: 'background.default',
+              }} 
+            >
+              <TextField 
+                type="text"
+                value={editValue}
+                label="Edit task"
+                onChange={(e) => {
+                  setEditValue(e.target.value)
+                  setCancel(true);
+                }}
+                sx={{
+                  width: {
+                    md: 260,
+                    xs: 300,
+                  },
+                }}
+              />
+            </Box>
           </Box> 
 
         : 
