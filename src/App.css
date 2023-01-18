@@ -1,3 +1,7 @@
+.colorTest {
+  color: #f0f0f045;
+}
+
 .color1 {
   background-color: #dedcff;
 }
@@ -45,6 +49,11 @@
 .text-blur-out {
 	-webkit-animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.rotate-scale-up {
+	-webkit-animation: rotate-scale-up 3s linear both;
+	        animation: rotate-scale-up 3s linear both;
 }
 
 /**
@@ -193,6 +202,40 @@
   100% {
     -webkit-filter: blur(12px) opacity(0%);
             filter: blur(12px) opacity(0%);
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation rotate-scale-up
+ * ----------------------------------------
+ */
+ @-webkit-keyframes rotate-scale-up {
+  0% {
+    -webkit-transform: scale(1) rotateZ(0);
+            transform: scale(1) rotateZ(0);
+  }
+  50% {
+    -webkit-transform: scale(2) rotateZ(180deg);
+            transform: scale(2) rotateZ(180deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotateZ(360deg);
+            transform: scale(1) rotateZ(360deg);
+  }
+}
+@keyframes rotate-scale-up {
+  0% {
+    -webkit-transform: scale(1) rotateZ(0);
+            transform: scale(1) rotateZ(0);
+  }
+  50% {
+    -webkit-transform: scale(2) rotateZ(180deg);
+            transform: scale(2) rotateZ(180deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotateZ(360deg);
+            transform: scale(1) rotateZ(360deg);
   }
 }
 

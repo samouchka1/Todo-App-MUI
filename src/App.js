@@ -15,23 +15,24 @@ import ClearIcon from '@mui/icons-material/Clear';
 import './App.css';
 import 'animate.css';
 
-const bgGradient = 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);'
+const mainBgGradient = 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);'
+const taskBgGradient = '#f0f0f045';
 
 const MainContainerStyles = {
   textAlign: 'center',
   padding: { md: '1.6rem', xs: '1.2rem'},
-  background: bgGradient,
+  background: mainBgGradient,
   borderRadius: '5px',
   border: 'solid .5px #aaaaaa',
-  boxShadow: '2px 2px 4px #c4c4c4',
+  boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)', //elecation 7
   height: '14rem',
 }
 const containerStyles = {
   textAlign: 'center', 
-  background: bgGradient,
+  background: taskBgGradient,
   borderRadius: '5px',
-  border: 'solid .5px #aaaaaa',
-  boxShadow: '2px 2px 4px #c4c4c4',
+  // border: 'solid .5px #aaaaaa',
+  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)', //elevation 4
   height: 'auto',
 }
 
@@ -231,7 +232,7 @@ const theme = useTheme();
                   document.getElementById(index).classList.add("text-blur-out"); // animate__bounceOut
                   setTimeout(() => {
                     removeTask(index);
-                  }, 550);
+                  }, 600);
                 }} 
               >
                 <DeleteOutlinedIcon fontSize="small" color="error"/>
@@ -316,6 +317,7 @@ const theme = useTheme();
               variant="h4" 
               sx={titleStyle} 
               className="title animate__animated"
+              
             >
               To-do App
             </Typography>
@@ -338,6 +340,7 @@ const theme = useTheme();
       <Typography maxWidth='md' sx={signatureStyle}>
           &copy; {new Date().getFullYear()} samouchka
       </Typography>
+
     </ThemeProvider>
   )
 }
