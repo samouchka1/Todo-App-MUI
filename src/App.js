@@ -228,7 +228,7 @@ const theme = useTheme();
               <Button  //remove task
                 sx={iconBorderStyles}
                 onClick={() => {
-                  document.getElementById(index).classList.add("animate__bounceOut"); //text-blur-out
+                  document.getElementById(index).classList.add("text-blur-out"); // animate__bounceOut
                   setTimeout(() => {
                     removeTask(index);
                   }, 550);
