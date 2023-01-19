@@ -22,7 +22,7 @@ const MainContainerStyles = {
   textAlign: 'center',
   padding: { md: '1.6rem', xs: '1.2rem'},
   background: mainBgGradient,
-  borderRadius: '5px',
+  borderRadius: '10px',
   border: 'solid .5px #aaaaaa',
   boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)', //elecation 7
   height: '14rem',
@@ -30,7 +30,7 @@ const MainContainerStyles = {
 const containerStyles = {
   textAlign: 'center', 
   background: taskBgGradient,
-  borderRadius: '5px',
+  borderRadius: '10px',
   // border: 'solid .5px #aaaaaa',
   boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)', //elevation 4
   height: 'auto',
@@ -78,7 +78,7 @@ const theme = useTheme();
 
   const [tasks, setTasks] = useState([]);
   const [complete, setComplete] = useState(false)
-  // const [show, setShow] = useState(false) //setShow
+  const [show, setShow] = useState(false) //setShow
 
   const addTask = (title) => {
     const newTasks = [...tasks, { title, completed: false }];
@@ -96,7 +96,10 @@ const theme = useTheme();
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
-    // setShow(false);
+
+    if(newTasks.length === 0){
+    setShow(false);
+    }
   };
 
   const editTask = (index, editedTitle) => {
@@ -256,7 +259,8 @@ const theme = useTheme();
       if (!value) return;
       addTask(value);
       setValue("");
-      // setShow(true);
+
+      setShow(true); // ================ SETSHOW
     }
     return ( 
       
@@ -294,7 +298,8 @@ const theme = useTheme();
           }}
         >
 
-          {/* {show &&  */}
+          {/* === SHOW === */}
+          {show && 
             <Box sx={containerStyles}>
               {tasks.map((task, index) => (
                   <>
@@ -310,7 +315,7 @@ const theme = useTheme();
                   </>
               ))}
             </Box>
-          {/* } */}
+          }
 
           <Box sx={MainContainerStyles}>
             <Typography 
