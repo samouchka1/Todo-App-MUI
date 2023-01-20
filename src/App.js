@@ -16,7 +16,6 @@ import './App.css';
 import 'animate.css';
 
 const mainBgGradient = 'linear-gradient(150deg, rgba(212,208,239,1) 0%, rgba(241,241,241,1) 100%);'
-const taskBgGradient = '#f0f0f045';
 
 const MainContainerStyles = {
   textAlign: 'center',
@@ -29,11 +28,15 @@ const MainContainerStyles = {
 }
 const containerStyles = {
   textAlign: 'center', 
-  background: taskBgGradient,
   borderRadius: '10px',
   // border: 'solid .5px #aaaaaa',
   boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)', //elevation 4
   height: 'auto',
+  background: '#f0f0f045',
+  '&:hover': {
+    background: '#f0f0f075'
+  },
+  transition: '.35s' 
 }
 
 const iconBorderStyles = {
@@ -77,8 +80,9 @@ const theme = useTheme();
   }, [])
 
   const [tasks, setTasks] = useState([]);
-  const [complete, setComplete] = useState(false)
-  const [showContainer, setShowContainer] = useState(false) //setShow
+  const [complete, setComplete] = useState(false);
+  const [showContainer, setShowContainer] = useState(false); //setShow
+  // const [focusEffect, setFocusEffect] = useState(false);
 
   const addTask = (title) => {
     const newTasks = [...tasks, { title, completed: false }];
@@ -273,6 +277,7 @@ const theme = useTheme();
           value={value}
           label="Add task"
           onChange={(e) => setValue(e.target.value)}
+          // onFocus={()=> setFocusEffect(true)} // onFocus not working
           sx={{
             width: 400,
             maxWidth: '100%',
@@ -320,11 +325,15 @@ const theme = useTheme();
             </Box>
           }
 
-          <Box sx={MainContainerStyles}>
+          <Box sx={MainContainerStyles} 
+            // className={
+            //     focusEffect ? 'box-shadow: 0px 10px 13px -6px rgba(250, 250, 250, 0.2),0px 20px 31px 3px rgba(255, 255, 255, 0.14),0px 8px 38px 7px rgba(255, 255, 255, 0.12);'
+            //     : ''}
+          >
             <Typography 
               variant="h4" 
               sx={titleStyle} 
-              className="title animate__animated"
+              className="title animate__animated "
               
             >
               To-do App
