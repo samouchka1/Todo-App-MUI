@@ -50,10 +50,14 @@ const iconBorderStyles = {
 
 const titleStyle = {
   margin: '2rem 0',
-  fontFamily: 'Nunito, sans-serif', //font family
+  fontFamily: 'Comfortaa, cursive', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
+  // '&:hover' {
+    
+  // },
   caretColor: 'transparent',
+  letterSpacing: .05,
 }
 
 const signatureStyle = {
@@ -82,6 +86,7 @@ const theme = useTheme();
   const [tasks, setTasks] = useState([]);
   const [complete, setComplete] = useState(false);
   const [showContainer, setShowContainer] = useState(false); //setShow
+  const [titleEffect, setTitleEffect] = useState(false);
   // const [focusEffect, setFocusEffect] = useState(false);
 
   const addTask = (title) => {
@@ -333,8 +338,9 @@ const theme = useTheme();
             <Typography 
               variant="h4" 
               sx={titleStyle} 
-              className="title animate__animated "
-              
+              className={`title ${titleEffect ? 'rotate-center': ''}`}
+              onMouseEnter={()=> setTimeout(() => {setTitleEffect(true)}, 400)}
+              onMouseLeave={()=> setTitleEffect(false)}
             >
               To-do App
             </Typography>

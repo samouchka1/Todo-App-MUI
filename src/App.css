@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+/* google fonts */
+
 .colorTest {
   color: #f0f0f045;
 }
@@ -15,7 +18,7 @@
 
 .boxShadowTest {
   box-shadow: 0px 10px 13px -6px rgba(250, 250, 250, 0.2),0px 20px 31px 3px rgba(255, 255, 255, 0.14),0px 8px 38px 7px rgba(255, 255, 255, 0.12);
-  }
+}
   
 
 /*EDIT STYLES*/
@@ -34,11 +37,6 @@
 .tracking-in-expand {
 	-webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-}
-
-.slide-out-left {
-	-webkit-animation: slide-out-left 0.35s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: slide-out-left 0.35s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 .color-change-2x {
@@ -62,8 +60,13 @@
 }
 
 .fade-in {
-	-webkit-animation: fade-in 1.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 1.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.rotate-center {
+	-webkit-animation: rotate-center 2s ease-in-out infinite both;
+	        animation: rotate-center 2s ease-in-out infinite both;
 }
 
 /**
@@ -99,54 +102,24 @@
 
 /**
  * ----------------------------------------
- * animation slide-out-left
- * ----------------------------------------
- */
- @-webkit-keyframes slide-out-left {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
-  }
-}
-@keyframes slide-out-left {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
-  }
-}
-
-/**
- * ----------------------------------------
  * animation color-change-2x
  * ----------------------------------------
  */
  @-webkit-keyframes color-change-2x {
   0% {
-    background: #dcd4ff;
+    background: #d4e9ff;
   }
   100% {
-    background: #b3bdff;
+    background: #9aa7fa;
   }
 }
 @keyframes color-change-2x {
   0% {
-    background: #dcd4ff;
+    background: #d4e9ff;
   
   }
   100% {
-    background: #b3bdff;
+    background: #9aa7fa;
   }
 }
 
@@ -268,5 +241,31 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+ @-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
