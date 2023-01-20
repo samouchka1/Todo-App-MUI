@@ -78,7 +78,7 @@ const theme = useTheme();
 
   const [tasks, setTasks] = useState([]);
   const [complete, setComplete] = useState(false)
-  const [show, setShow] = useState(false) //setShow
+  const [showContainer, setShowContainer] = useState(false) //setShow
 
   const addTask = (title) => {
     const newTasks = [...tasks, { title, completed: false }];
@@ -96,9 +96,11 @@ const theme = useTheme();
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
-
+    //close if no tasks
     if(newTasks.length === 0){
-    setShow(false);
+      setTimeout(() => {
+        setShowContainer(false);
+      }, 350)
     }
   };
 
@@ -258,9 +260,8 @@ const theme = useTheme();
       e.preventDefault();
       if (!value) return;
       addTask(value);
-      setValue("");
-
-      setShow(true); // ================ SETSHOW
+      setValue('');
+      setShowContainer(true); // setShow
     }
     return ( 
       
@@ -299,8 +300,10 @@ const theme = useTheme();
         >
 
           {/* === SHOW === */}
-          {show && 
-            <Box sx={containerStyles}>
+          {showContainer && 
+            <Box sx={containerStyles} 
+              className={showContainer ? 'fade-in' : ''}
+            >
               {tasks.map((task, index) => (
                   <>
                     {/*TASK COMPONENT */}

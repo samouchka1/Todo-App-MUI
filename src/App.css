@@ -47,13 +47,18 @@
 }
 
 .text-blur-out {
-	-webkit-animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	-webkit-animation: text-blur-out .9s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-blur-out .9s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 .rotate-scale-up {
 	-webkit-animation: rotate-scale-up 3s linear both;
 	        animation: rotate-scale-up 3s linear both;
+}
+
+.fade-in {
+	-webkit-animation: fade-in 1.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 1.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 /**
@@ -239,4 +244,25 @@
   }
 }
 
+/**
+ * ----------------------------------------
+ * animation fade-in
+ * ----------------------------------------
+ */
+ @-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
