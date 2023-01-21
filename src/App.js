@@ -24,7 +24,7 @@ const MainContainerStyles = {
   borderRadius: '10px',
   border: 'solid .5px #aaaaaa',
   boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)', //elecation 7
-  height: '14rem',
+  height: '19rem',
 }
 const containerStyles = {
   textAlign: 'center', 
@@ -49,7 +49,7 @@ const iconBorderStyles = {
 }
 
 const titleStyle = {
-  margin: '2rem 0',
+  margin: '0 0 1rem',
   fontFamily: 'Comfortaa, cursive', //font family
   color: '#090909f7', //title color
   textShadow: 'white 3px 3px 3px',
@@ -57,7 +57,7 @@ const titleStyle = {
     
   // },
   caretColor: 'transparent',
-  letterSpacing: .05,
+  letterSpacing: .005,
 }
 
 const signatureStyle = {
@@ -335,12 +335,18 @@ const theme = useTheme();
             //     focusEffect ? 'box-shadow: 0px 10px 13px -6px rgba(250, 250, 250, 0.2),0px 20px 31px 3px rgba(255, 255, 255, 0.14),0px 8px 38px 7px rgba(255, 255, 255, 0.12);'
             //     : ''}
           >
-            <Typography 
-              variant="h4" 
-              sx={titleStyle} 
+            <Box 
+              component="img"
+              alt="Logo"
+              src={process.env.PUBLIC_URL + 'todo-logo.png'}
               className={`title ${titleEffect ? 'rotate-center': ''}`}
               onMouseEnter={()=> setTimeout(() => {setTitleEffect(true)}, 400)}
               onMouseLeave={()=> setTitleEffect(false)}
+            />
+
+            <Typography 
+              variant="h4" 
+              sx={titleStyle}
             >
               To-do App
             </Typography>
