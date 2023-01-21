@@ -34,7 +34,7 @@ const containerStyles = {
   height: 'auto',
   background: '#f0f0f045',
   '&:hover': {
-    background: '#f0f0f075'
+    background: '#f0f0f085'
   },
   transition: '.35s' 
 }
@@ -51,8 +51,8 @@ const iconBorderStyles = {
 const titleStyle = {
   margin: '0 0 1rem',
   fontFamily: 'Comfortaa, cursive', //font family
-  color: '#090909f7', //title color
-  textShadow: 'white 3px 3px 3px',
+  color: '#353160', //title color
+  textShadow: 'white 3px 3px 4px',
   // '&:hover' {
     
   // },
@@ -192,7 +192,7 @@ const theme = useTheme();
               // backgroundColor: task.completed ? '#bbbbbb85' : '#ffffff85',
               textAlign: 'left',
               fontFamily: 'Nunito, sans-serif',
-              fontSize: '1rem',
+              fontSize: '1.1rem',
               width: {
                 md: 260,
                 xs: 300,
@@ -304,7 +304,7 @@ const theme = useTheme();
             margin: '6rem 0', 
             display: 'flex', 
             flexDirection: {md: 'row', xs: 'column-reverse'}, 
-            // gap: '.5rem',
+            gap: '.5rem',
             justifyContent: 'center'
           }}
         >
@@ -340,8 +340,7 @@ const theme = useTheme();
               alt="Logo"
               src={process.env.PUBLIC_URL + 'todo-logo.png'}
               className={`title ${titleEffect ? 'rotate-center': ''}`}
-              onMouseEnter={()=> setTimeout(() => {setTitleEffect(true)}, 400)}
-              onMouseLeave={()=> setTitleEffect(false)}
+              onClick={()=> setTitleEffect(!titleEffect)}
             />
 
             <Typography 
