@@ -32,9 +32,9 @@ const containerStyles = {
   // border: 'solid .5px #aaaaaa',
   boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)', //elevation 4
   height: 'auto',
-  background: '#f0f0f045',
+  background: '#b7b1d870',
   '&:hover': {
-    background: '#f0f0f085'
+    background: '##b7b1d885'
   },
   transition: '.35s' 
 }
@@ -339,13 +339,14 @@ const theme = useTheme();
               component="img"
               alt="Logo"
               src={process.env.PUBLIC_URL + 'todo-logo.png'}
-              className={`title ${titleEffect ? 'rotate-center': ''}`}
+              className={`${titleEffect ? 'rotate-center': ''}`}
               onClick={()=> setTitleEffect(!titleEffect)}
             />
 
             <Typography 
               variant="h4" 
               sx={titleStyle}
+              className="title"
             >
               To-do App
             </Typography>
