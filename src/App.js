@@ -192,7 +192,7 @@ const theme = useTheme();
               // backgroundColor: task.completed ? '#bbbbbb85' : '#ffffff85',
               textAlign: 'left',
               fontFamily: 'Nunito, sans-serif',
-              fontSize: '1.1rem',
+              fontSize: '1.3rem',
               width: {
                 md: 260,
                 xs: 300,
@@ -354,12 +354,6 @@ const theme = useTheme();
             {/*CREATE TASK COMPONENT*/}
             <CreateTask addTask={addTask} />
           </Box>
-
-          {/* <Box>
-            {tasks.map((task, index) => (
-              <Typography key={index}>{task.completed}</Typography>
-            ))}
-          </Box> */}
 
         </Box>
         
